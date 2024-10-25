@@ -8,6 +8,6 @@ export default class LancamentoModule
 
   constructor(private dbConnect: Connection, private appHttp: AppHttp)
   { 
-    this.lancamentoController = new LancamentoController();
+    this.lancamentoController = new LancamentoController(this.appHttp);
   }
 }
