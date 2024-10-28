@@ -2,7 +2,7 @@
 export default class Lancamento 
 { 
   private id: number;
-  private usuario: number;
+  private usuario: string;
   private ticket: string;
   private tipo: string;
   private quantidade: number;
@@ -11,7 +11,7 @@ export default class Lancamento
   private compra: boolean;
 
   constructor(
-    id: number, usuario: number, ticket: string,
+    id: number, usuario: string, ticket: string,
     tipo: string, quantidade: number, preco: number, 
     data: Date, compra: boolean
 

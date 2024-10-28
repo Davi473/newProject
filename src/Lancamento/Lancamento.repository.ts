@@ -18,10 +18,22 @@ export default class LancamentoRepository
 
   public async select(usuario: number)
   {
-    const lancamentos: LancamentoModel[] = await this.dbConnect.query(
-      "SELECT * FROM ativos.lancamento WHERE usuario = $1",
-      [usuario]
-    );
+    const query = `
+      SELECT 
+        l.is AS id, a.ticket AS ticket, a.tipo AS tipo,
+        l.quantidade, l.preco, l.data,
+        CASE 
+          WHEN l.compra = true THEN 'compra' ELSE 'venda'
+        END AS operacao  
+      FROM 
+        lancamento l 
+      JOIN 
+        usuarios u ON l.id_usuario = u.id
+      JOIN 
+        ativo a ON l.id_ativo = a.id
+      WHERE 
+        l.usuario = $1`
+    const lancamentos: LancamentoModel[] = await this.dbConnect.query(query, [usuario]);
     return this.mapLancamento(lancamentos);
   }
   /*
