@@ -1,7 +1,7 @@
 import Connection from "../config/dbConnect";
 import Lancamento from "./Lancamento";
 
-interface LancamentoData {
+interface LancamentoModel {
   id: number;
   usuario: string;
   ticket: string;
@@ -12,13 +12,13 @@ interface LancamentoData {
   compra: boolean;
 }
 
-export default class LancamentoModel
+export default class LancamentoRepository
 {
   constructor(private dbConnect: Connection) {}
 
-  public async select(usuario: string)
+  public async select(usuario: number)
   {
-    const lancamentos: LancamentoData[] = await this.dbConnect.query(
+    const lancamentos: LancamentoModel[] = await this.dbConnect.query(
       "SELECT * FROM ativos.lancamento WHERE usuario = $1",
       [usuario]
     );
@@ -32,7 +32,7 @@ export default class LancamentoModel
     )
   }
   */
-  private mapLancamento(lancamentos: LancamentoData[])
+  private mapLancamento(lancamentos: LancamentoModel[])
   {  
     const lancamento: Lancamento[] = [];
     if(lancamentos.length > 0)

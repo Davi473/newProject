@@ -1,5 +1,5 @@
 import express, {Express, Request, Response} from "express";
-import 'reflect-metadata';
+import Cors
 
 type HttpMethod = 'get' | 'post' | 'put' | 'delete' | 'patch';
 
